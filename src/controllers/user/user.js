@@ -4,6 +4,7 @@ const {
   isValidName,
   isValidEmail,
   passwordVal,
+  checkFormat,
 } = require("../../utils/validation/validation");
 const jwt = require("jsonwebtoken");
 
@@ -11,59 +12,44 @@ const register = async (req, res) => {
   try {
     let { name, email, password } = req.body;
     let admin = {};
-    // name field---------------------
+    name=checkFormat(name)
     if (!name)
       return res
         .status(400)
-        .send({ status: false, message: "name is required" });
-    else {
-      name = name.trim();
-      if (name == "")
-        return res
-          .status(400)
-          .send({ status: false, message: "name field cannot be empty" });
-      if (!isValidName(name))
+        .send({ status: false, message: "please check your name" })
+
+    if (!isValidName(name))
         return res
           .status(400)
           .send({ status: false, message: "pass valid name" });
       admin.name = name.toLowerCase();
-    }
+    
     // email field-------------------------
 
+    email=checkFormat(email)
     if (!email)
       return res
         .status(400)
-        .send({ status: false, message: "email is required" });
-    else {
-      email = email.trim();
-      if (email == "")
-        return res
-          .status(400)
-          .send({ status: false, message: "email field cannot be empty" });
+        .send({ status: false, message: "please check your name" })
       if (!isValidEmail(email))
         return res
           .status(400)
           .send({ status: false, message: "pass valid email" });
       admin.email = email.toLowerCase();
-    }
+   
     // password field----------------------
 
+    password=checkFormat(password)
     if (!password)
       return res
         .status(400)
-        .send({ status: false, message: "password is required" });
-    else {
-      password = password.trim();
-      if (password == "")
-        return res
-          .status(400)
-          .send({ status: false, message: "password field cannot be empty" });
+        .send({ status: false, message: "please check your password" })
       if (!passwordVal(password))
         return res
           .status(400)
           .send({ status: false, message: "pass valid password" });
       admin.password = password;
-    }
+    
     // check duplicate email
     let checkEmail = await services.checkEmail({email:email});
     if (checkEmail)
@@ -88,26 +74,21 @@ const login = async function (req, res) {
   try {
     let { email, password } = req.body;
 
+    email=checkFormat(email)
     if (!email)
       return res
         .status(400)
-        .send({ status: false, message: "please provide email" });
-    email = email.trim().toLowerCase();
-    if (email == "")
-      return res
-        .status(400)
-        .send({ status: false, message: "email cannot be empty" });
+        .send({ status: false, message: "please check your email" })
+        email=email.toLowerCase();
     if (!isValidEmail(email))
       return res.status(400).send({ status: false, message: "Invalid email" });
-    if (!password)
-      return res
-        .status(400)
-        .send({ status: false, message: "please provide password" });
-    password = password.trim();
-    if (password == "")
-      return res
-        .status(400)
-        .send({ status: false, message: "password cannot be empty" });
+
+      
+      password=checkFormat(password)
+      if (!password)
+        return res
+          .status(400)
+          .send({ status: false, message: "please check your password" })
 
     let userData = await services.checkEmail({ email: email, isDeleted: false });
     if (!userData)

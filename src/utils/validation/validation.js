@@ -30,8 +30,15 @@ const isValidEmail = function (email) {
     }
     return true;
   };
+  const checkFormat=function(input)
+  {
+    if (!input) return false
+    input = input.trim();
+    if (input == "") return false;
+    else return input
+      
+}
   
   
   
-  
-  module.exports = {isValidEmail,passwordVal,isValidName,isValidString};
+  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat};
