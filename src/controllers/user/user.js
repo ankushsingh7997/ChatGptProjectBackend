@@ -1,12 +1,8 @@
-const userModel = require("../../models/userModel");
 const services = require("../../services/userServices/userservice");
-const {
-  isValidName,
-  isValidEmail,
-  passwordVal,
-  checkFormat,
+const {isValidName,isValidEmail,passwordVal,checkFormat,
 } = require("../../utils/validation/validation");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 const register = async (req, res) => {
   try {
@@ -48,7 +44,9 @@ const register = async (req, res) => {
         return res
           .status(400)
           .send({ status: false, message: "pass valid password" });
-      admin.password = password;
+
+          //hash user entered password
+      admin.password =  await bcrypt.hash(password, password.length);
     
     // check duplicate email
     let checkEmail = await services.checkEmail({email:email});
@@ -83,7 +81,7 @@ const login = async function (req, res) {
     if (!isValidEmail(email))
       return res.status(400).send({ status: false, message: "Invalid email" });
 
-      
+
       password=checkFormat(password)
       if (!password)
         return res
@@ -96,7 +94,8 @@ const login = async function (req, res) {
         .status(404)
         .send({ status: false, message: "no user found with this email" });
     else {
-      if (userData.password != password)
+        const comparePassword=bcrypt.compareSync(password,userData.password)
+      if (!comparePassword)
         return res
           .status(400)
           .send({ status: false, message: "incorrect password" });
