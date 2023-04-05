@@ -104,8 +104,8 @@ const login = async function (req, res) {
     // token creation
     let token = jwt.sign(
       { userId: userData._id.toString(), emailId: userData.email },
-      "californium",
-      { expiresIn: "10h" }
+      process.env.JWT_ACCESS_KEY,
+      { expiresIn: process.env.JWT_ACCESS_EXPIRE }
     );
     res.setHeader("x-api-key", token);
     const obj = {};
