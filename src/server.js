@@ -45,7 +45,7 @@ app.use((req, res, next) => {
     console.log(`application is running on ${PORT} 🟢` );
   });
 
-  process.on("unhandledRejection", (error, promise) => {
-    console.log(`Logged Error: ${error}`);
-    server.close(() => process.exit(1))
-  });
+  // process.on("unhandledRejection", (error, promise) => {
+  //   console.log(`Logged Error: ${error}`);
+  //   server.close(() => process.exit(1))
+  // });

@@ -1,8 +1,9 @@
 const services = require("../../services/userServices/userservice");
 const {isValidName,isValidEmail,passwordVal,checkFormat,
 } = require("../../utils/validation/validation");
-const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const { jwttoken } = require("../../utils/jwttoken/jwttoken");
+const cookie=require('cookie');
 
 const register = async (req, res) => {
   try {
@@ -102,21 +103,22 @@ const login = async function (req, res) {
     }
 
     // token creation
-    let token = jwt.sign(
-      { userId: userData._id.toString(), emailId: userData.email },
-      process.env.JWT_ACCESS_KEY,
-      { expiresIn: process.env.JWT_ACCESS_EXPIRE }
-    );
-    res.setHeader("x-api-key", token);
-    const obj = {};
-    obj.userId = userData._id;
-    obj.token = token;
+    const tokenObject = jwttoken(userData._id,userData.email)
+    res.setHeader("x-api-key", tokenObject.token);
+    res.cookie('refreshToken',`${tokenObject.refreshToken}`,{maxAge:86400*7000,httpOnly:true})
+  //  console.log(res)
     return res
       .status(200)
-      .send({ status: true, message: "User login successfull", data: obj });
+      .send({ status: true, message: "User login successfull", data: userId = userData._id });
   } catch (error) {
     return res.status(500).send({ status: false, message: error.message });
   }
 };
+const logout=async function (req,res)
+{
+res.clearCookies('refreshToken')
+return res.status(200).send({status:true,message:'logout successfully'})
 
-module.exports = { register, login };
+}
+
+module.exports = { register, login,logout };
