@@ -4,6 +4,7 @@ const cors=require('cors');
 const morgan=require('morgan');
 const { dbConnection } = require('./db/dbConnection');
 const router = require('./routes/router');
+const multer=require('multer')
 require('dotenv').config();
 const PORT=process.env.PORT ||4000;
 
@@ -12,6 +13,7 @@ const PORT=process.env.PORT ||4000;
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cors());
+app.use(multer().any())
 
 
 app.use(cors({ origin: '*' }));

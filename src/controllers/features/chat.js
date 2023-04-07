@@ -2,18 +2,12 @@ const { Configuration, OpenAIApi } =require("openai");
 const axios=require('axios')
 
 
-const OPENAI_API_KEY="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"; 
-
-
-
- 
-
 const ask=async (req,res)=>
 {
     try{
          
         const {question}=req.body;
-        const OPENAI_API_KEY="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";   
+        const OPENAI_API_KEY="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";   
         
         // const configuration = new Configuration({
             

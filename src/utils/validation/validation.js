@@ -38,7 +38,13 @@ const isValidEmail = function (email) {
     else return input
       
 }
+
+// image validation
+const isValidImage = function (name) {
+  const linkRegex =/(.png|.jpg|.jpeg)$/i;
+  return linkRegex.test(name);
+};
   
   
   
-  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat};
+  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat,isValidImage};

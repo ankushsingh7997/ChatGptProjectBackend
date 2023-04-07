@@ -1,11 +1,15 @@
 const express=require('express');
 const router=express.Router();
-const userController=require('../controllers/user/user');
-const { ask } = require('../controllers/features/chat');
 
-router.post('/register',userController.register)
-router.post('/login',userController.login)
+const { ask } = require('../controllers/features/chat');
+const { register } = require('../controllers/user/userRegister');
+const { login } = require('../controllers/user/userLogin');
+const { userUpdate } = require('../controllers/user/userUpdate');
+
+router.post('/register',register)
+router.post('/login',login)
 router.post('/ask',ask)
+router.put('/user/:userId/update',userUpdate)
 
 
 

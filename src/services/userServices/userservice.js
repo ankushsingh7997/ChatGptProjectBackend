@@ -24,5 +24,18 @@ function createData(data)
 
 }
 
+function updateData(userId,data)
+{
+    try{
 
-module.exports={checkEmail,createData}
+        return userModel.findOneAndUpdate({ _id: userId, isDeleted: false },data,{ new: true });
+        
+    }
+    catch(error)
+    {
+        return res.status(500).send({ status: false, message: error.message });
+    }
+}
+
+
+module.exports={checkEmail,createData,updateData}

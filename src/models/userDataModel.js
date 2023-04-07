@@ -9,10 +9,7 @@ const userDataSchema=new mongoose.Schema({
         questions:{
             type:[Object]
         },
-        profile:{
-            type:String,
-            default:""
-        }
+      
   
     
     },{timestamps:true});

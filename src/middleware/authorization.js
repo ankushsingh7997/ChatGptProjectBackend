@@ -1,7 +1,11 @@
+const { checkFormat } = require("../utils/validation/validation");
+
 const authorization = async function (req, res, next) {
     try {
       let userTokenId = req.decodedToken.userId;
-      let userId = req.params.userId;
+      let userId = checkFormat(req.params.userId);
+      if(!userId) return res.status(400).send({status:false,message:'not authorized'})
+      
   
       if (userTokenId != userId)
         return res
