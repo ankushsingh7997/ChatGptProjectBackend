@@ -14,7 +14,7 @@ app.use(morgan('dev'));
 app.use(cors());
 
 
-//app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*' }));
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(

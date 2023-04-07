@@ -104,12 +104,19 @@ const login = async function (req, res) {
 
     // token creation
     const tokenObject = jwttoken(userData._id,userData.email)
-    res.setHeader("x-api-key", tokenObject.token);
-    res.cookie('refreshToken',`${tokenObject.refreshToken}`,{maxAge:86400*7000,httpOnly:true})
-  //  console.log(res)
+    // res.setHeader("x-api-key", tokenObject.token); 
+    console.log(tokenObject.token)
+
+    // res.cookie('refreshToken',`${tokenObject.refreshToken}`,{maxAge:86400*7000,httpOnly:true})
+   console.log("\n"+tokenObject.refreshToken)
+   const data={
+    userId : userData._id, 
+    "x-api-key":tokenObject.token,
+    refreshToken:tokenObject.refreshToken,
+      };
     return res
       .status(200)
-      .send({ status: true, message: "User login successfull", data: userId = userData._id });
+      .send({ status: true, message: "User login successfull", data });
   } catch (error) {
     return res.status(500).send({ status: false, message: error.message });
   }
