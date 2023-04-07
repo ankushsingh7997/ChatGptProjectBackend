@@ -11,7 +11,7 @@ const userUpdate=async (req,res)=>{
 
     try{
     let{name,password,confirmPassword}=req.body;
-    console.log(req.body)
+    
     let user = {};
     name=checkFormat(name)
     if (!name)
@@ -63,10 +63,16 @@ const userUpdate=async (req,res)=>{
         }
   
       }
-console.log(req.params.userId)
-      const updateUser=await services.updateData(req.params.userId,user)
-      console.log(updateUser)
-      return res.status(200).send({status:true,data:updateUser})
+
+      let updateUser=await services.updateData(req.params.userId,user)
+      if(!updateUser) return res.status(404).send({status:false,message:'no user found'})
+          updateUser=updateUser.toObject()
+      const userUpdateddata={
+        name:updateUser.name,
+        profileImage:updateUser.profileImage
+
+      }
+      return res.status(200).send({status:true,message:'data updated',data:userUpdateddata})
     }
     catch(err)
     {
