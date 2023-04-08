@@ -6,7 +6,8 @@ const userDataSchema=new mongoose.Schema({
       
         ref:'user',
         unique:true},
-        userKey:{type:String},
+        userKey:{type:String,
+          unique:true,require:true},
         questions:{
             type:[Object],
             default:[]

@@ -8,7 +8,8 @@ const authentication = async function (req, res, next) {
     let token = req.headers.authorization.split(" ")[1];
    
     jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decodedToken) => {
-      if (err) {
+      if (err) 
+      {
         return res.status(400).send({ status: false, message:"you have no permission" });
       } else {
         req.decodedToken = decodedToken; 
