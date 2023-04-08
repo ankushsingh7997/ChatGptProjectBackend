@@ -12,6 +12,7 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:""
     },
+    userKey:{type:String,unique:true,require:true},
 
     isDeleted:{type:Boolean,default:false}
     

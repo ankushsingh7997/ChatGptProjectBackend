@@ -1,10 +1,10 @@
 let jwt=require('jsonwebtoken')
 
-function jwttoken(id,email)
+function jwttoken(id,userKey,email)
 {
     
     const token = jwt.sign(
-        { userId:id.toString(), emailId:email },
+        { userId:id.toString(), emailId:email,userKey:userKey },
         process.env.JWT_ACCESS_KEY,
         { expiresIn: process.env.JWT_ACCESS_EXPIRE  }
       );

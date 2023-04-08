@@ -3,6 +3,7 @@ const {isValidName,isValidEmail,passwordVal,checkFormat, isValidImage,
 } = require("../../utils/validation/validation");
 const bcrypt = require("bcrypt");
 const uploadFile = require("../../aws/aws");
+const { generateUserKey } = require("../../utils/helperfunctions/helperfunction");
 
 const register = async (req, res) => {
   try {
@@ -49,7 +50,8 @@ const register = async (req, res) => {
     user.password =  await bcrypt.hash(password, password.length);
     
     // check duplicate email
-    let checkEmail = await services.checkEmail({email:email});
+    let checkEmail = await services.checkEmail({email:user.email});
+    
     if (checkEmail)
     return res
     .status(400)
@@ -72,8 +74,11 @@ const register = async (req, res) => {
       }
 
     }
+    // generate user key
+    user.userKey=generateUserKey(email,name);
 
     let createUser = await services.createData(user);
+    await services.createFirstUserData(createUser.userKey)
     return res
       .status(200)
       .send({

@@ -1,6 +1,7 @@
 const services = require("../../services/userServices/userservice");
 const bcrypt = require("bcrypt");
 const { jwttoken } = require("../../utils/jwttoken/jwttoken");
+const { checkFormat, isValidEmail } = require("../../utils/validation/validation");
 
 
 // login--------------------------------------------------------------------------------
@@ -37,10 +38,10 @@ const login = async  (req, res)=> {
           .send({ status: false, message: "incorrect password" });
     }
 
-
+    
 
     // token creation
-    const tokenObject = jwttoken(userData._id,userData.email)
+    const tokenObject = jwttoken(userData._id,userData.userKey,userData.email)
     // res.setHeader("x-api-key", tokenObject.token); 
     console.log(tokenObject.token)
 

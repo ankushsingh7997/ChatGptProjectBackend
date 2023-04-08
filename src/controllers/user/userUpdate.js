@@ -1,5 +1,5 @@
 const services = require("../../services/userServices/userservice");
-const {isValidName,passwordVal,checkFormat, isValidImage,
+const {isValidName,passwordVal,checkFormat, isValidImage, checkObject,
 } = require("../../utils/validation/validation");
 const bcrypt = require("bcrypt");
 const uploadFile = require("../../aws/aws");
@@ -13,17 +13,14 @@ const userUpdate=async (req,res)=>{
     let{name,password,confirmPassword}=req.body;
     
     let user = {};
+    if(name){
     name=checkFormat(name)
-    if (!name)
-      return res
-        .status(400)
-        .send({ status: false, message: "please check your name" })
+    if (!name)return res.status(400).send({ status: false, message: "please check your name" })
 
     if (!isValidName(name))
-        return res
-          .status(400)
-          .send({ status: false, message: "pass valid name" });
-      user.name = name.toLowerCase();
+        return res.status(400).send({ status: false, message: "pass valid name" });
+        user.name = name.toLowerCase();
+    }
 
 
       // password section
@@ -45,11 +42,12 @@ const userUpdate=async (req,res)=>{
       //hash user entered password
       user.password =  await bcrypt.hash(password, password.length);
        }
-
-
+console.log(req.files)
+       
       // image update
-      if (req.files.length > 0) 
+      if (req.files&&req.files.length > 0) 
       {
+       
         user.files = req.files;
   
         if(user.files[0]&&!isValidImage(user.files[0].originalname))
@@ -63,8 +61,10 @@ const userUpdate=async (req,res)=>{
         }
   
       }
+      
+      if(!checkObject(user)) return res.status(400).send({status:false,message:'please provide some data to update'})
 
-      let updateUser=await services.updateData(req.params.userId,user)
+      let updateUser=await services.updateData(req.params.userKey,user)
       if(!updateUser) return res.status(404).send({status:false,message:'no user found'})
           updateUser=updateUser.toObject()
       const userUpdateddata={

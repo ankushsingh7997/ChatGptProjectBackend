@@ -7,9 +7,9 @@ const authentication = async function (req, res, next) {
         .send({ status: false, message: "token is required" });
     let token = req.headers.authorization.split(" ")[1];
    
-    jwt.verify(token, JWT_ACCESS_KEY, (err, decodedToken) => {
+    jwt.verify(token, process.env.JWT_ACCESS_KEY, (err, decodedToken) => {
       if (err) {
-        return res.status(400).send({ status: false, message: err.message });
+        return res.status(400).send({ status: false, message:"you have no permission" });
       } else {
         req.decodedToken = decodedToken; 
         next();

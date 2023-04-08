@@ -44,7 +44,13 @@ const isValidImage = function (name) {
   const linkRegex =/(.png|.jpg|.jpeg)$/i;
   return linkRegex.test(name);
 };
+//
+const checkObject=(object)=>
+{
+  if(Object.keys(object).length==0) return false;
+  return true;
+}
   
   
   
-  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat,isValidImage};
+  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat,isValidImage,checkObject};
