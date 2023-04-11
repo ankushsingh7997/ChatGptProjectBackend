@@ -1,4 +1,5 @@
-const { FetchUserDetails, fetchLogs } = require("../../services/userServices/userservice")
+const { FetchUserDetails, fetchLogs } = require("../../services/userServices/userservice");
+const { checkFormat } = require("../../utils/validation/validation");
 
 const fetchDetailsLogs=async (req,res)=>{
 

@@ -30,18 +30,18 @@ const ask=async (req,res)=>
             temperature: 0,
           });
           let text=formatText(completion.data.choices[0].text)
-          console.log(text)
+          
 
+          let uniqueKey=Date.now().toString();
           
-          
-          let userData={$addToSet:{questions:{uniqueKey:Date.now().toString(),[message]:text}}}
+          let userData={$addToSet:{questions:{uniqueKey:uniqueKey,question:message,answer:text}}}
           
           let questionUpdate=await updateQuestions(req.params.userKey,userData)
          
-          console.log(questionUpdate)
+          
           
 
-        return res.status(200).send({status:true,message:text})
+        return res.status(200).send({status:true,uniqueKey:uniqueKey,question:message,message:text})
 }
     catch(error)
     {

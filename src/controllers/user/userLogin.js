@@ -48,7 +48,7 @@ const login = async  (req, res)=> {
     // res.cookie('refreshToken',`${tokenObject.refreshToken}`,{maxAge:86400*7000,httpOnly:true})
    console.log("\n"+tokenObject.refreshToken)
    const data={
-    userId : userData._id, 
+    userKey : userData.userKey, 
     "x-api-key":tokenObject.token,
     refreshToken:tokenObject.refreshToken,
       };

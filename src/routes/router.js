@@ -16,7 +16,7 @@ router.post('/login',login)
 router.post('/ask/:userKey',authentication,ask)
 router.put('/user/:userKey/update',authentication,authorization,userUpdate)
 router.delete('/user/:userKey/delete',authentication,authorization,deleteUser)
-router.delete('/deleteChat/:userKey/:uniqueKey',deleteChat)
+router.delete('/deleteChat/:userKey/:uniqueKey',authentication,authorization,deleteChat)
 router.get('/fetchuser/:userKey',fetchDetailsLogs)
 
 

@@ -57,28 +57,14 @@ const register = async (req, res) => {
     .status(400)
     .send({ status: false, message: "email is already in use" });
 
-    // Image
-
-    if (req.files.length > 0) 
-    {
-      user.files = req.files;
-
-      if(user.files[0]&&!isValidImage(user.files[0].originalname))
-      {
-        return res.status(400).send({status: false,message:"Image format is Invalid please provide .jpg or .png or .jpeg format",});
-      }
-      else
-      {
-        let uploadImageUrl=await uploadFile(user.files[0]);
-        user.profileImage=uploadImageUrl;
-      }
-
-    }
+    
     // generate user key
     user.userKey=generateUserKey(email,name);
 
     let createUser = await services.createData(user);
-    await services.createFirstUserData(createUser.userKey)
+    console.log(createUser)
+    await services.createFirstUserData(user.userKey)
+    console.log(' i am here')
     return res
       .status(200)
       .send({

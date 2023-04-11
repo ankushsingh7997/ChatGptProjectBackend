@@ -41,10 +41,12 @@ const updateData=(userKey,data)=>
 
 const createFirstUserData=(userKey)=>{
     try{
+        console.log('i am here')
     return userDataModel.create({userKey:userKey});
     }
     catch(error)
     {
+        console.log('then here')
         return res.status(500).send({ status: false, message: error.message });
     }
 
@@ -62,6 +64,8 @@ const deleteQuestion=(userKey,uniqueKey)=>{
 // fetch user Details
 const FetchUserDetails= async (userKey)=>{
     let userDetails= await userModel.findOne({userKey:userKey,isDeleted:false});
+    if(!userDetails) return false
+
     return {name:userDetails.name,email:userDetails.email,profileImage:userDetails.profileImage}
 }
 
