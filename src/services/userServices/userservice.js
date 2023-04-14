@@ -41,7 +41,7 @@ const updateData=(userKey,data)=>
 
 const createFirstUserData=(userKey)=>{
     try{
-        console.log('i am here')
+        
     return userDataModel.create({userKey:userKey});
     }
     catch(error)
@@ -52,11 +52,12 @@ const createFirstUserData=(userKey)=>{
 
 }
 
-
+// update question
 const updateQuestions=(userKey,object)=>{
     return userDataModel.findOneAndUpdate({userKey:userKey},object,{new:true})
 
 }
+// delete question
 const deleteQuestion=(userKey,uniqueKey)=>{
     return userDataModel.updateOne({userKey:userKey},{$pull:{questions:{uniqueKey:uniqueKey}}},{new:true});
 }

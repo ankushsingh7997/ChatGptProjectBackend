@@ -43,10 +43,10 @@ const login = async  (req, res)=> {
     // token creation
     const tokenObject = jwttoken(userData._id,userData.userKey,userData.email)
     // res.setHeader("x-api-key", tokenObject.token); 
-    console.log(tokenObject.token)
+    
 
     // res.cookie('refreshToken',`${tokenObject.refreshToken}`,{maxAge:86400*7000,httpOnly:true})
-   console.log("\n"+tokenObject.refreshToken)
+   
    const data={
     userKey : userData.userKey, 
     "x-api-key":tokenObject.token,

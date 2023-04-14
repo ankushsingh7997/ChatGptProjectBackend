@@ -1,3 +1,5 @@
+const userDataModel = require("../../models/userDataModel");
+
 const formatText=(text)=>{
    
 
@@ -15,4 +17,13 @@ const formatText=(text)=>{
 
 }
 
-module.exports={formatText}
+
+const DeleteAllChat= async(userKey)=>{
+
+  let result=await userDataModel.findOneAndUpdate({userKey:userKey},{questions:[]},{new:true})
+  return result?result:false
+
+
+}
+
+module.exports={formatText,DeleteAllChat}

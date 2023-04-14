@@ -10,6 +10,7 @@ const uploadFile = require("../../aws/aws");
 const userUpdate=async (req,res)=>{
 
     try{
+      
     let{name,password,confirmPassword}=req.body;
     
     let user = {};
@@ -42,12 +43,11 @@ const userUpdate=async (req,res)=>{
       //hash user entered password
       user.password =  await bcrypt.hash(password, password.length);
        }
-console.log(req.files)
+
        
       // image update
       if (req.files&&req.files.length > 0) 
       {
-       
         user.files = req.files;
   
         if(user.files[0]&&!isValidImage(user.files[0].originalname))
@@ -61,6 +61,7 @@ console.log(req.files)
         }
   
       }
+      
       
       if(!checkObject(user)) return res.status(400).send({status:false,message:'please provide some data to update'})
 
