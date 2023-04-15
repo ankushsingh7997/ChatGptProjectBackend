@@ -8,23 +8,23 @@
 
 The ChatGPT project is a chat application that uses an OpenAI API to generate responses to user input. The project is built using Node.js and Express.js, with MongoDB as the database and AWS S3 to store user profile images. Authentication and authorization are achieved using JSON Web Tokens (JWT) and passwords are encrypted using bcrypt. The project includes features for user registration, login, editing profile data, uploading profile images, deleting users, deleting chats, and fetching logs.`
 
-`To get started with the project, you will need to clone the repository and install the dependencies listed in the package.json file using npm. You will also need to set up environment variables in the .env file, including the MongoDB connection URI, JWT access key and expiration time, and refresh token.`
+To get started with the project, you will need to clone the repository and install the dependencies listed in the package.json file using npm. You will also need to set up environment variables in the .env file, including the MongoDB connection URI, JWT access key and expiration time, and refresh token.
 
-`The project folder structure is organized into the src folder, which includes subfolders for controllers, middleware, models, routes, services, utils, and validation. The server.js file is the entry point for the application, and it imports the necessary middleware and routes.`
+The project folder structure is organized into the src folder, which includes subfolders for controllers, middleware, models, routes, services, utils, and validation. The server.js file is the entry point for the application, and it imports the necessary middleware and routes.
 
-`The controllers folder includes modules for handling user registration, login, updating user data, and deleting users. The features folder includes modules for asking questions to the OpenAI API, deleting chats, and fetching logs.`
+The controllers folder includes modules for handling user registration, login, updating user data, and deleting users. The features folder includes modules for asking questions to the OpenAI API, deleting chats, and fetching logs.
 
-`The middleware folder includes modules for authentication and authorization, which are used to protect certain routes from unauthorized access.`
+The middleware folder includes modules for authentication and authorization, which are used to protect certain routes from unauthorized access.
 
-`The models folder includes the user data model, which defines the schema for user data stored in the MongoDB database. The userDataModel schema is an array of objects that hold a question-answer pair and a unique ID for each object.`
+The models folder includes the user data model, which defines the schema for user data stored in the MongoDB database. The userDataModel schema is an array of objects that hold a question-answer pair and a unique ID for each object.
 
-`The routes folder includes modules that define the API routes for the application, including routes for user registration, login, asking questions, updating user data, deleting users, deleting chats, and fetching logs.`
+The routes folder includes modules that define the API routes for the application, including routes for user registration, login, asking questions, updating user data, deleting users, deleting chats, and fetching logs
 
-`The services folder includes modules that provide functions to perform CRUD (Create, Read, Update, Delete) operations on user data. The utils folder includes modules that provide helper functions, such as generating JWT tokens.`
+The services folder includes modules that provide functions to perform CRUD (Create, Read, Update, Delete) operations on user data. The utils folder includes modules that provide helper functions, such as generating JWT tokens.
 
-`The validation folder includes modules that provide functions to validate user input for registration and login.`
+The validation folder includes modules that provide functions to validate user input for registration and login.
 
-`Overall, the ChatGPT project is a fully functional chat application that leverages the power of OpenAI to provide intelligent responses to user input. It is secure, efficient, and easy to use, making it an ideal choice for anyone looking to build a chat application with Node.js and Express.js.
+Overall, the ChatGPT project is a fully functional chat application that leverages the power of OpenAI to provide intelligent responses to user input. It is secure, efficient, and easy to use, making it an ideal choice for anyone looking to build a chat application with Node.js and Express.js.
 
 
 
