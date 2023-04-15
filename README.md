@@ -74,8 +74,8 @@ Clone the repository. Run npm install to install dependencies. Create a .env fil
 Clone the repository and navigate to the project directory
 Install dependencies using npm install
 Create a .env file with the following variables:
-* ``URI` - MongoDB Atlas connection string
-* PORT` - Port to run the server on
+* `URI` - MongoDB Atlas connection string
+* `PORT` - Port to run the server on
 * `JWT_ACCESS_KEY` - Secret key for JWT access token
 * `JWT_ACCESS_EXPIRE` - Expiration time for JWT access token
 * `JWT_REFRESH_TOKEN` - Secret key for JWT refresh token
