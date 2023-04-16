@@ -12,6 +12,12 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:""
     },
+    phone:{
+        type:String,
+        unique: true,
+        required:true
+    }
+    ,
     userKey:{type:String,unique:true,require:true},
 
     isDeleted:{type:Boolean,default:false}

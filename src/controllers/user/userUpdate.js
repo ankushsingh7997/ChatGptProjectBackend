@@ -1,5 +1,5 @@
 const services = require("../../services/userServices/userservice");
-const {isValidName,passwordVal,checkFormat, isValidImage, checkObject,
+const {isValidName,passwordVal,checkFormat, isValidImage, checkObject, isValidEmail, validPhone,
 } = require("../../utils/validation/validation");
 const bcrypt = require("bcrypt");
 const uploadFile = require("../../aws/aws");
@@ -11,7 +11,9 @@ const userUpdate=async (req,res)=>{
 
     try{
       
-    let{name,password,confirmPassword}=req.body;
+      
+    let{name,password,confirmPassword,phone,email}=req.body;
+    
     
     let user = {};
     if(name){
@@ -20,7 +22,7 @@ const userUpdate=async (req,res)=>{
 
     if (!isValidName(name))
         return res.status(400).send({ status: false, message: "pass valid name" });
-        user.name = name.toLowerCase();
+        user.name = name
     }
 
 
@@ -61,6 +63,58 @@ const userUpdate=async (req,res)=>{
         }
   
       }
+      // email
+      if(email)
+      {
+        
+        email=checkFormat(email)
+        
+        
+    if (!email)
+    return res
+    .status(400)
+    .send({ status: false, message: "please check your email" })
+   
+    if (!isValidEmail(email)) return res.status(400).send({ status: false, message: "pass valid email" });
+    email = email.toLowerCase();
+    
+      
+      
+      // check email duplicacy
+      let checkDuplicateEmail=await services.checkEmailDup(email)
+      console.log(checkDuplicateEmail)
+
+      if(checkDuplicateEmail) return res.status(400).send({status:false,message:"duplicate email"})
+         user.email=email
+      }
+      
+
+
+
+
+      if(phone)
+      {
+
+        phone=checkFormat(phone)
+        if (!phone)
+        return res
+        .status(400)
+        .send({ status: false, message: "please check your phone" })
+        if (!validPhone(phone))
+        return res
+        .status(400)
+        .send({ status: false, message: "pass valid phone" });
+    
+          
+          // check phone duplicacy
+          let checkDuplicatePhone=await services.checkPhone(phone)
+          if(checkDuplicatePhone) return res.status(400).send({status:false,message:"please check your phone number"})
+          user.phone=phone
+          }
+          
+
+
+      
       
       
       if(!checkObject(user)) return res.status(400).send({status:false,message:'please provide some data to update'})
@@ -70,7 +124,9 @@ const userUpdate=async (req,res)=>{
           updateUser=updateUser.toObject()
       const userUpdateddata={
         name:updateUser.name,
-        profileImage:updateUser.profileImage
+        profileImage:updateUser.profileImage,
+        email:updateUser.email,
+        phone:updateUser.phone
 
       }
       return res.status(200).send({status:true,message:'data updated',data:userUpdateddata})

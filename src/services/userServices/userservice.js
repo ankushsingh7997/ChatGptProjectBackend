@@ -9,9 +9,62 @@ const checkEmail=async (email)=>
       }
     catch(error)
     {
-        return res.status(500).send({ status: false, message: error.message });
+        console.log(error.message)
     }
 }
+const checkEmailDup=async (email)=>
+{
+    try{
+          let result = await userModel.findOne({email:email})
+             console.log("i am here with result" , result)
+          
+          return result;
+      }
+    catch(error)
+    {
+        console.log(error.message)
+    }
+}
+const checkPhone=async (phone)=>
+{
+    try{
+          return await userModel.findOne({phone:phone})
+      }
+    catch(error)
+    {
+        console.log(error.message)
+    }
+}
+
+
+
+
+const checkEmailAndNumber= async (email,phone)=>
+{
+    try
+    {
+    let userExist = await userModel.find({
+        $or: [{ email:email }, { phone:phone }],
+      });
+      if (userExist.length >= 1) {
+        if (email == userExist[0].email) {
+          return {status:false,message:"email duplicate"}
+        } else
+          return {status:false,message:"phone duplicate"}
+      }
+      return {status:true,message:"no duplicacy"}
+    }
+    catch(error)
+    {
+        console.log(error.message)
+    }
+
+
+}
+
+
+
+
 // data Creation
 const createData=(data)=>
 {
@@ -67,7 +120,7 @@ const FetchUserDetails= async (userKey)=>{
     let userDetails= await userModel.findOne({userKey:userKey,isDeleted:false});
     if(!userDetails) return false
 
-    return {name:userDetails.name,email:userDetails.email,profileImage:userDetails.profileImage}
+    return {name:userDetails.name,email:userDetails.email,phone:userDetails.phone,profileImage:userDetails.profileImage}
 }
 
 // fetch question an answer list
@@ -78,4 +131,4 @@ const fetchLogs= async (userKey)=>{
 
 
 
-module.exports={checkEmail,createData,updateData,updateQuestions,createFirstUserData,deleteQuestion,FetchUserDetails,fetchLogs}
+module.exports={checkEmail,createData,checkEmailDup,updateData,updateQuestions,createFirstUserData,checkPhone,deleteQuestion,FetchUserDetails,fetchLogs,checkEmailAndNumber}

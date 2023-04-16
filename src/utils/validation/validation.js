@@ -50,7 +50,15 @@ const checkObject=(object)=>
   if(Object.keys(object).length==0) return false;
   return true;
 }
+const  validPhone=function (phone)
+{
+     let result =checkFormat(phone)
+     if(!result) return false
+     const validnumber = /^[6789]\d{9}$/
+     return validnumber.test(phone);
+
+}
   
   
   
-  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat,isValidImage,checkObject};
+  module.exports = {isValidEmail,passwordVal,isValidName,isValidString,checkFormat,isValidImage,checkObject,validPhone};
