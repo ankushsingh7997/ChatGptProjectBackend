@@ -4,8 +4,6 @@
 
 # Project Description:
 
-
-
 The ChatGPT project is a chat application that uses an OpenAI API to generate responses to user input. The project is built using Node.js and Express.js, with MongoDB as the database and AWS S3 to store user profile images. Authentication and authorization are achieved using JSON Web Tokens (JWT) and passwords are encrypted using bcrypt. The project includes features for user registration, login, editing profile data, uploading profile images, deleting users, deleting chats, and fetching logs.`
 
 To get started with the project, you will need to clone the repository and install the dependencies listed in the package.json file using npm. You will also need to set up environment variables in the .env file, including the MongoDB connection URI, JWT access key and expiration time, and refresh token.
@@ -67,9 +65,9 @@ Install my-project with npm
 
 Clone the repository. Run npm install to install dependencies. Create a .env file and add your MongoDB connection URI, port, and JWT keys. Run npm start to start the application.
     
-## Usage/Examples
+https://github.com/ankushsingh7997/summerCodeProjectBackend.git
 
-## Usage/Examples
+
 
 Clone the repository and navigate to the project directory
 Install dependencies using npm install
@@ -82,7 +80,7 @@ Create a .env file with the following variables:
 
 Start the server using npm start
 
-Access the application at http://localhost:{PORT}
+Access the application at "https://chatgpt3-ujj0.onrender.com
 
 Register an account or login with an existing one
 

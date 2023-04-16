@@ -16,13 +16,6 @@ const ask=async (req,res)=>
 
         const openai=new OpenAIApi(configuration)
        
-
-        // const completion = await openai.createChatCompletion({
-        //   model: "gpt-3.5-turbo",
-        //   messages: [{role: "user", content: message}],
-        // })
-
-        // let text=formatText(completion.data.choices[0].message.content)
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: message,
@@ -76,21 +69,3 @@ module.exports={ask}
 
 
 
-// const axios=require('axios')
-
-
-//    // await axios.post(
-        //     'https://api.openai.com/v1/completions',
-        //     {
-        //       model: 'text-davinci-003',
-        //       prompt: question,
-        //       max_tokens: 7,
-        //       temperature: 0,
-        //     },
-        //     {
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //         Authorization: `Bearer ${OPENAI_API_KEY}`,
-        //       },
-        //     }
-        //   ).then((response)=>console.log(response))
