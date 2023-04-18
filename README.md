@@ -80,7 +80,7 @@ Create a .env file with the following variables:
 
 Start the server using npm start
 
-Access the application at "https://chatgpt3-ujj0.onrender.com
+Access the application at "summer-code-project-backend-72pe.vercel.app
 
 Register an account or login with an existing one
 
