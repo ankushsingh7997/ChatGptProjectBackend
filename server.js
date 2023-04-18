@@ -2,8 +2,8 @@ const express=require('express');
 const app=express();
 const cors=require('cors');
 const morgan=require('morgan');
-const { dbConnection } = require('./db/dbConnection');
-const router = require('./routes/router');
+const { dbConnection } = require('./src/db/dbConnection');
+const router = require('./src/routes/router');
 const multer=require('multer')
 require('dotenv').config();
 const PORT=process.env.PORT ||4000;
