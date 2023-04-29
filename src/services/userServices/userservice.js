@@ -107,26 +107,54 @@ const createFirstUserData=(userKey)=>{
 
 // update question
 const updateQuestions=(userKey,object)=>{
+    try{
     return userDataModel.findOneAndUpdate({userKey:userKey},object,{new:true})
+    }
+    catch(error)
+    {
+        
+       return res.status(500).send({status:false,message:error.message})
+    }
 
 }
 // delete question
 const deleteQuestion=(userKey,uniqueKey)=>{
+    try{
     return userDataModel.updateOne({userKey:userKey},{$pull:{questions:{uniqueKey:uniqueKey}}},{new:true});
+    }
+    catch(error)
+    {
+        
+       return res.status(500).send({status:false,message:error.message})
+    }
 }
 
 // fetch user Details
 const FetchUserDetails= async (userKey)=>{
+    try{
     let userDetails= await userModel.findOne({userKey:userKey,isDeleted:false});
     if(!userDetails) return false
 
     return {name:userDetails.name,email:userDetails.email,phone:userDetails.phone,profileImage:userDetails.profileImage}
+    }
+    catch(error)
+    {
+        
+       return res.status(500).send({status:false,message:error.message})
+    }
 }
 
 // fetch question an answer list
 const fetchLogs= async (userKey)=>{
+    try{
     let data= await userDataModel.findOne({userKey:userKey});
     return {questions:data.questions}
+    }
+    catch(error)
+    {
+        
+       return res.status(500).send({status:false,message:error.message})
+    }
     }
 
 

@@ -2,6 +2,7 @@ const { FetchUserDetails, fetchLogs } = require("../../services/userServices/use
 const { checkFormat } = require("../../utils/validation/validation");
 
 const fetchDetailsLogs=async (req,res)=>{
+    try{
 
     // validation of userKey
     let userKey=checkFormat(req.params.userKey)
@@ -15,6 +16,11 @@ const fetchDetailsLogs=async (req,res)=>{
 
     const chatLogs=await fetchLogs(userKey)
     return res.status(200).send({status:true,message:'successfully retrived',data,chatLogs})
+    }
+    catch(error)
+    { 
+       return res.status(500).send({status:false,message:error.message})
+    }
 
 }
 module.exports={fetchDetailsLogs}
